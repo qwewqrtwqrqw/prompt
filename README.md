@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Prompt Studio
 
-## Getting Started
+Веб-приложение для изучения промпт-инженерии, создания шаблонов промптов и публикации их в общем каталоге.
 
-First, run the development server:
+**Стек:** Next.js 16, React 19, TypeScript, Tailwind CSS, Mock REST API (Node.js), React Hook Form + Zod, Vitest, Playwright.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Демо
+
+- Локально: `http://localhost:3000`
+- Mock API: `http://localhost:3001`
+- Демо-аккаунт: `demo@example.com` / `demo123`
+
+> После деплоя добавьте сюда ссылку на Vercel/Netlify.
+
+## Функциональность
+
+- **Обучение** — материалы по CoT, few-shot, role prompting, structured output
+- **Каталог** — просмотр публичных шаблонов, лайки, детальная страница с подсветкой
+- **Личный кабинет** — CRUD шаблонов, публикация/приватность
+- **Авторизация** — вход и регистрация с валидацией форм
+- **Редактор промптов** — подсветка синтаксиса (заголовки, переменные, JSON, XML, CAPS, MetaGlyph и др.)
+- **Доступность** — skip-link, aria-атрибуты, семантическая разметка, focus-visible
+- **Оптимизация** — dynamic import редактора и превью, optimizePackageImports
+
+## Информационная архитектура
+
+```
+/                     — главная
+/learn                — список тем
+/learn/[slug]         — статья по теме
+/catalog              — публичный каталог
+/catalog/[id]         — просмотр шаблона
+/login, /register     — авторизация
+/dashboard            — личный кабинет
+/dashboard/templates/new
+/dashboard/templates/[id]/edit
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Быстрый старт
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev:all
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Или в двух терминалах:
 
-## Learn More
+```bash
+npm run mock   # порт 3001
+npm run dev    # порт 3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+Сборка:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Тестирование
 
-## Deploy on Vercel
+```bash
+npm run test           # unit-тесты (Vitest)
+npm run test:coverage  # покрытие
+npm run test:e2e       # e2e (Playwright)
+npx playwright install chromium
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Lighthouse
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Запустите production-сборку: `npm run build && npm run start`
+2. В другом терминале: `npm run mock`
+3. Выполните аудит: `npm run lighthouse`
+4. Отчёт сохранится в `docs/lighthouse-report.html`
+
+Рекомендации для зелёных Web Vitals уже учтены: tree-shaking через Next.js, dynamic import тяжёлых компонентов, без лишних зависимостей.
+
+## Структура проекта
+
+```
+mock/                 — Mock REST API
+src/app/              — страницы (App Router)
+src/components/       — UI-компоненты
+src/context/          — контекст авторизации
+src/lib/              — API-клиент, валидация
+src/utils/            — подсветка синтаксиса
+e2e/                  — Playwright-тесты
+docs/                 — отчёты Lighthouse
+```
+
+## Этапы разработки
+
+1. IA, репозиторий, навигация
+2. Формы, валидация, редактор промптов
+3. Unit + e2e тесты
+4. Lighthouse-аудит
+5. Доступность и финальная полировка
+
+## Автор
+
+Итоговый проект по дисциплине «Разработка интерфейса пользователя».

@@ -1,0 +1,70 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Анна Петрова",
+      "email": "demo@example.com",
+      "password": "demo123"
+    }
+  ],
+  "templates": [
+    {
+      "id": 1,
+      "title": "Chain-of-Thought для анализа",
+      "description": "Пошаговый шаблон для структурированного рассуждения модели",
+      "content": "## Задача\n— Разбей проблему на этапы\n→ Сначала определи {{topic}}\n→ Затем перечисли факты\n\nCAPS для ключевых выводов.\n\n\"шаг\": \"ответ\"\n\n<output>итог</output>\n+++Format: markdown",
+      "category": "reasoning",
+      "isPublic": true,
+      "authorId": 1,
+      "authorName": "Анна Петрова",
+      "createdAt": "2026-05-10T10:00:00.000Z",
+      "likes": 12
+    },
+    {
+      "id": 2,
+      "title": "Few-shot классификатор",
+      "description": "Примеры пар «вход → метка» для точной классификации",
+      "content": "## Few-shot\n\nПример 1: «отличный сервис» → positive\nПример 2: «долго ждал» → negative\n\nКлассифицируй: {{text}}\n∈ positive | negative",
+      "category": "classification",
+      "isPublic": true,
+      "authorId": 1,
+      "authorName": "Анна Петрова",
+      "createdAt": "2026-05-15T14:30:00.000Z",
+      "likes": 8
+    }
+  ],
+  "topics": [
+    {
+      "id": 1,
+      "slug": "chain-of-thought",
+      "title": "Chain-of-Thought",
+      "summary": "Техника пошагового рассуждения для сложных задач",
+      "content": "Chain-of-Thought (CoT) просит модель явно прописывать промежуточные шаги. Это снижает ошибки в математике, логике и анализе.\n\n## Когда применять\n— многошаговые задачи\n— нужна проверяемость рассуждений\n\n## Шаблон\n→ Опиши задачу\n→ Разбей на шаги\n→ Выведи ответ",
+      "order": 1
+    },
+    {
+      "id": 2,
+      "slug": "few-shot",
+      "title": "Few-shot prompting",
+      "summary": "Обучение на примерах прямо в промпте",
+      "content": "Few-shot — это 2–5 примеров желаемого поведения внутри промпта. Модель переносит паттерн на новый вход.\n\n## Советы\n— примеры должны быть разнообразными\n— формат входа/выхода единообразен\n— добавь {{переменные}} для гибкости",
+      "order": 2
+    },
+    {
+      "id": 3,
+      "slug": "role-prompting",
+      "title": "Role prompting",
+      "summary": "Назначение роли и контекста эксперта",
+      "content": "Role prompting задаёт персону: «Ты — senior UX-ревьюер». Роль сужает стиль ответа и повышает релевантность.\n\n<role>эксперт</role>\n<context>{{domain}}</context>\n\nCAPS используй для MUST-HAVE требований.",
+      "order": 3
+    },
+    {
+      "id": 4,
+      "slug": "structured-output",
+      "title": "Structured output",
+      "summary": "JSON и схемы для предсказуемых ответов",
+      "content": "Structured output фиксирует формат ответа через JSON-схему или пример.\n\n\"title\": \"string\"\n\"items\": []\n\n+++Format: json\n\nИспользуй декоратор +++Format для явного указания формата.",
+      "order": 4
+    }
+  ]
+}
